@@ -2,7 +2,7 @@
 
 - name: configure private network
   template:
-    src: ifcfg-ethX.j2
+    src: ../templates/ifcfg-ethX.j2
     dest: "/etc/sysconfig/network-scripts/ifcfg-{{ centos_private_interface }}"
   become: true
   notify: restart network

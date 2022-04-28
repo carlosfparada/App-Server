@@ -1,5 +1,8 @@
 ---
 
+- import_tasks:
+    file: handlers/main.yml
+
 - include_tasks:
     file: pre-config.yml
   tags: [preconfig]
