@@ -1,0 +1,6 @@
+---
+
+demo_hostname: host
+
+private_ip: 10.10.10.10
+centos_private_interface: eth1

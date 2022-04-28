@@ -1,0 +1,11 @@
+---
+- name: App Server Demos
+  hosts: all
+  gather_facts: false
+  connection: local
+  tasks:
+    - include_vars: ../defaults/main.yml
+
+    - include_tasks: ../tasks/main.yml
+      tags: [facts, netbox]
+
