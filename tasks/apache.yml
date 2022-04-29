@@ -1,7 +1,7 @@
 ---
 
 - name: install apache webserver and PHP
-  yum:
+  dnf:
     name: "{{ packages }}"
   vars:
     packages:
