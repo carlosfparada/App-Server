@@ -4,13 +4,12 @@
   gather_facts: false
   connection: local
 
-  handlers:
-    - import_tasks:
-      file: ../handlers/main.yml
-
   tasks:
     - include_vars: ../defaults/main.yml
 
     - include_tasks: ../tasks/main.yml
       tags: [facts, netbox]
 
+  handlers:
+    - import_tasks:
+      file: ../handlers/main.yml
