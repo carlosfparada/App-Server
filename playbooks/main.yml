@@ -11,5 +11,4 @@
       tags: [facts, netbox]
 
   handlers:
-    - import_tasks:
-      file: ../handlers/main.yml
+    - include_tasks: ../handlers/main.yml
