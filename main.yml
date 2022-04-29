@@ -1,0 +1,59 @@
+---
+
+- name: App Server Demos
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - include_vars: ../defaults/main.yml
+
+    - name: configure private network
+      template:
+        src: ../templates/ifcfg-ethX.j2
+        dest: "/etc/sysconfig/network-scripts/ifcfg-{{ centos_private_interface }}"
+      become: true
+      notify: restart network
+
+    - name: disable firewalld
+      service: 
+        name: firewalld
+        enabled: no
+        state: stopped
+      become: true
+      ignore_errors: yes
+
+    - name: install apache webserver and PHP
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - httpd 
+          - php 
+          - php-common
+      become: yes
+      notify: restart httpd server
+
+    - name: webpage template
+      template:
+        src: webpage.html.j2
+        dest: /var/www/html/index.html
+        owner: apache
+        mode: "0644"
+      become: yes
+      notify: restart httpd server
+
+  handlers:
+    - name: restart httpd server 
+      service: 
+        name: httpd
+        enabled: yes
+        state: restarted
+      become: yes
+
+    - name: restart network
+      service: 
+        name: network
+        state: restarted
+        enabled: yes
+      become: yes
