@@ -3,7 +3,6 @@
 - name: install apache webserver and PHP
   yum:
     name: "{{ packages }}"
-    use_backend: yum
   vars:
     packages:
       - httpd 
