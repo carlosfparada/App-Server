@@ -1,7 +1,7 @@
 ---
 - name: App Server Demos
-  hosts: all
-  
+  hosts: webserver
+
   tasks:
     - include_vars: ../defaults/main.yml
 
